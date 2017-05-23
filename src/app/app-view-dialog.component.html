@@ -1,17 +1,16 @@
 <md-card class="example-card">
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
-    <md-card-title>Shiba Inu</md-card-title>
-    <md-card-subtitle>Dog Breed</md-card-subtitle>
+    <md-card-title>{{data.get('name') | slice:0:1}}**</md-card-title>
+    <md-card-subtitle>{{data.createdAt | date:'yyyy-MM-dd hh:mm'}}</md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="assets/img/examples/shiba2.jpg">
   <md-card-content>
     <p>
       {{data.get('ques')}}
     </p>
   </md-card-content>
   <md-card-actions>
-    <button md-button>LIKE</button>
-    <button md-button>SHARE</button>
+    <button md-button><md-icon md-list-icon>thumb_up</md-icon></button>
+    <button md-button><md-icon>thumb_down</md-icon></button>
   </md-card-actions>
 </md-card>
