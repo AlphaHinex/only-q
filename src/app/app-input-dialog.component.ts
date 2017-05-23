@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 
 export class Ques {
-  constructor(public name: string, public ques: string) {}
+  constructor(public name: string, public ques: string, public up: number, public down: number) {}
 }
 
 @Component({
@@ -11,9 +11,6 @@ export class Ques {
   styleUrls: ['./app-input-dialog.component.css']
 })
 export class AppInputDialogComponent {
-  ques: Ques = {
-    name: null,
-    ques: null
-  };
+  ques: Ques = new Ques(null, null, 0, 0);
   constructor(public dialogRef: MdDialogRef<AppInputDialogComponent>) {}
 }
