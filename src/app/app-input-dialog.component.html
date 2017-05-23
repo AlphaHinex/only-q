@@ -1,0 +1,12 @@
+<form>
+  <md-input-container class="full-width">
+    <input mdInput placeholder="Tell me who are you" [(ngModel)]="ques.name" name="guy">
+  </md-input-container>
+  <md-input-container class="full-width" *ngIf="ques.name">
+    <textarea mdInput placeholder="Hello {{ques.name}}, tell me your question" [(ngModel)]="ques.ques" name="feedback"></textarea>
+  </md-input-container>
+  <button md-raised-button (click)="dialogRef.close(ques)" *ngIf="ques.ques">
+    <md-icon md-list-icon>send</md-icon>
+    Send
+  </button>
+</form>

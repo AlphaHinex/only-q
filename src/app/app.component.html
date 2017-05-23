@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <span>Questions</span>
+</md-toolbar>
+<md-nav-list>
+  <md-list-item *ngFor="let ques of questions" (click)="openViewDialog(ques)">
+    <md-icon md-list-icon>announcement</md-icon>
+    <h4 md-line>{{ques.get('ques')}}</h4>
+    <p md-line> {{ques.createdAt | date:'yyyy-MM-dd HH:mm'}} </p>
+  </md-list-item>
+</md-nav-list>
+<button md-fab class="example-fab" (click)="openDialog()">
+  <md-icon>add</md-icon>
+</button>
