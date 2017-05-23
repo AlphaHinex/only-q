@@ -15,7 +15,7 @@ export class AppViewDialogComponent {
     const obj = new QuesObject();
     obj.id = id;
     obj.fetch().then((ques: AV.Object) => {
-      ques.increment('up', 1);
+      ques.increment('score', 1);
       ques.fetchWhenSave(true);
       return ques.save();
     }).then(newData => this.data = newData);
@@ -25,7 +25,7 @@ export class AppViewDialogComponent {
     const obj = new QuesObject();
     obj.id = id;
     obj.fetch().then((ques: AV.Object) => {
-      ques.increment('down', 1);
+      ques.increment('score', -1);
       ques.fetchWhenSave(true);
       return ques.save();
     }).then(newData => this.data = newData);

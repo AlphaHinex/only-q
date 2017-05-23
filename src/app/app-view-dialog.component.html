@@ -1,6 +1,6 @@
 <md-card class="example-card">
   <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
+    <div md-card-avatar class="example-header-image">{{data.get('score')}}</div>
     <md-card-title>{{data.get('name') | slice:0:1}}**</md-card-title>
     <md-card-subtitle>{{data.createdAt | date:'yyyy-MM-dd hh:mm'}}</md-card-subtitle>
   </md-card-header>
@@ -12,11 +12,9 @@
   <md-card-actions>
     <button md-button (click)="thumbUp(data.id)">
       <md-icon md-list-icon>thumb_up</md-icon>
-      {{data.get('up')}}
     </button>
     <button md-button (click)="thumbDown(data.id)">
       <md-icon>thumb_down</md-icon>
-      {{data.get('down')}}
     </button>
   </md-card-actions>
 </md-card>
