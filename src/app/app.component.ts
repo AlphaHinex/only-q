@@ -4,10 +4,12 @@ import {AppInputDialogComponent, Ques} from './app-input-dialog.component';
 import * as AV from 'leancloud-storage';
 import {AppViewDialogComponent} from './app-view-dialog.component';
 
+export const QuesObject = AV.Object.extend('Ques');
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+selector: 'app-root',
+templateUrl: './app.component.html',
+styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   questions: AV.Object[] = [];
@@ -31,7 +33,7 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.name && result.ques) {
         const snackBar = this.snackBar;
-        const QuesObject = AV.Object.extend('Ques');
+        // const QuesObject = AV.Object.extend('Ques');
         const quesObject = new QuesObject();
         quesObject.save(result).then(function () {
           snackBar.open('Dear ' + result.name + ', thanks for your feedback!', '', {

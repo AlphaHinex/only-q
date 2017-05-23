@@ -10,7 +10,13 @@
     </p>
   </md-card-content>
   <md-card-actions>
-    <button md-button><md-icon md-list-icon>thumb_up</md-icon></button>
-    <button md-button><md-icon>thumb_down</md-icon></button>
+    <button md-button (click)="thumbUp(data.id)">
+      <md-icon md-list-icon>thumb_up</md-icon>
+      {{data.get('up')}}
+    </button>
+    <button md-button (click)="thumbDown(data.id)">
+      <md-icon>thumb_down</md-icon>
+      {{data.get('down')}}
+    </button>
   </md-card-actions>
 </md-card>
