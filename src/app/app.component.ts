@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
 
   getQues(): void {
     const query = new AV.Query('Ques');
-    query.descending('score');
-    // query.descending('createdAt');
+    query.addDescending('score');
+    query.addDescending('createdAt');
     query.include('name');
     query.include('ques');
     query.find<AV.Object[]>().then(objs => this.questions = objs);
