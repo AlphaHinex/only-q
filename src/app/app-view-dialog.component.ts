@@ -1,5 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MD_DIALOG_DATA} from '@angular/material';
+import {Http} from '@angular/http';
+import {options} from './app.component';
 
 @Component({
   selector: 'app-view-dialog',
@@ -7,25 +9,20 @@ import {MD_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./app-view-dialog.component.css']
 })
 export class AppViewDialogComponent {
-  constructor(@Inject(MD_DIALOG_DATA) public data) {}
+  constructor(@Inject(MD_DIALOG_DATA) public data, private http: Http) {}
+
+  updateScore(id: string, score: number): void {
+    this.http.put('https://api.leancloud.cn/1.1/classes/Ques/' + id,
+                  '{"score":{"__op":"Increment","amount":' + score + '}}',
+                  options)
+            .subscribe(() => this.data.score += score);
+  }
 
   thumbUp(id: string): void {
-    // const obj = new QuesObject();
-    // obj.id = id;
-    // obj.fetch().then((ques: AV.Object) => {
-    //   ques.increment('score', 1);
-    //   ques.fetchWhenSave(true);
-    //   return ques.save();
-    // }).then(newData => this.data = newData);
+    this.updateScore(id, 1);
   }
 
   thumbDown(id: string): void {
-    // const obj = new QuesObject();
-    // obj.id = id;
-    // obj.fetch().then((ques: AV.Object) => {
-    //   ques.increment('score', -1);
-    //   ques.fetchWhenSave(true);
-    //   return ques.save();
-    // }).then(newData => this.data = newData);
+    this.updateScore(id, -1);
   }
 }
