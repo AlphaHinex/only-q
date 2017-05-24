@@ -1,16 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {AppInputDialogComponent, Ques} from './app-input-dialog.component';
-import * as AV from 'leancloud-storage';
 import {AppViewDialogComponent} from './app-view-dialog.component';
 import {Headers, Http, RequestOptions} from '@angular/http';
 
-const headers = new Headers({
+export const headers = new Headers({
   'X-LC-Id': 'ncucSqWquNS5qSBCNrqEhA8O',
   'X-LC-Key': 'd6cARxGcTwgyi0IGz7ss7LHp'
 });
-
-export const QuesObject = AV.Object.extend('Ques');
 
 @Component({
 selector: 'app-root',
@@ -41,8 +38,6 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.name && result.ques) {
         const snackBar = this.snackBar;
-        // const QuesObject = AV.Object.extend('Ques');
-        // const quesObject = new QuesObject();
         headers.append('Content-Type', 'application/json');
         const options = new RequestOptions({
           headers: headers,
