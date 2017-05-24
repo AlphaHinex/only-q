@@ -19,6 +19,7 @@ after_success:
   - git rm -r .
   - cp -R ../dist/* .
   - cp ../dist/.* .
+  - sed -i "s/\"\/\"/\"\/only-q\/\"/" index.html
   - git add -f .
   - git config user.name "AlphaHinex"
   - git config user.email "AlphaHinex@gmail.com"
