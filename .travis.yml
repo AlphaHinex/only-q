@@ -19,6 +19,7 @@ after_success:
   - git rm -r .
   - cp -R ../dist/* .
   - cp ../dist/.* .
+  - ls -al
   - git add -f .
   - git config user.name "AlphaHinex"
   - git config user.email "AlphaHinex@gmail.com"
