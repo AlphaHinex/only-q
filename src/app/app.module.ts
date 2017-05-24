@@ -13,7 +13,6 @@ import 'hammerjs';
 
 import {AppComponent} from './app.component';
 import {AppInputDialogComponent} from './app-input-dialog.component';
-import * as AV from 'leancloud-storage';
 import {AppViewDialogComponent} from './app-view-dialog.component';
 
 @NgModule({
@@ -42,7 +41,3 @@ import {AppViewDialogComponent} from './app-view-dialog.component';
 })
 export class AppModule {
 }
-
-const appId = 'ncucSqWquNS5qSBCNrqEhA8O';
-const appKey = 'd6cARxGcTwgyi0IGz7ss7LHp';
-AV.init({ appId, appKey });

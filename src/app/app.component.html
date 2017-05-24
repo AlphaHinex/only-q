@@ -3,8 +3,8 @@
 </md-toolbar>
 <md-nav-list>
   <md-list-item *ngFor="let ques of questions" (click)="openViewDialog(ques)">
-    <p md-list-icon>{{ques.get('score')}}</p>
-    <h4 md-line>{{ques.get('ques')}}</h4>
+    <p md-list-icon>{{ques.score}}</p>
+    <h4 md-line>{{ques.ques}}</h4>
     <p md-line> {{ques.createdAt | date:'yyyy-MM-dd HH:mm'}} </p>
   </md-list-item>
 </md-nav-list>

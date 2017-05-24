@@ -3,6 +3,12 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 import {AppInputDialogComponent, Ques} from './app-input-dialog.component';
 import * as AV from 'leancloud-storage';
 import {AppViewDialogComponent} from './app-view-dialog.component';
+import {Headers, Http, RequestOptions} from '@angular/http';
+
+const headers = new Headers({
+  'X-LC-Id': 'ncucSqWquNS5qSBCNrqEhA8O',
+  'X-LC-Key': 'd6cARxGcTwgyi0IGz7ss7LHp'
+});
 
 export const QuesObject = AV.Object.extend('Ques');
 
@@ -12,17 +18,18 @@ templateUrl: './app.component.html',
 styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  questions: AV.Object[] = [];
+  questions = [];
 
-  constructor(public dialog: MdDialog, public snackBar: MdSnackBar) { }
+  constructor(public dialog: MdDialog, public snackBar: MdSnackBar, private http: Http) { }
 
   getQues(): void {
-    const query = new AV.Query('Ques');
-    query.addDescending('score');
-    query.addDescending('createdAt');
-    query.include('name');
-    query.include('ques');
-    query.find<AV.Object[]>().then(objs => this.questions = objs);
+    const options = new RequestOptions({
+      headers: headers,
+    });
+    const param = encodeURI('cql=select * from Ques limit 0,100 order by -score, -createdAt');
+    this.http.get('https://api.leancloud.cn/1.1/cloudQuery?' + param, options)
+              .map(res => res.json())
+              .subscribe(res => this.questions = res.results);
   }
 
   ngOnInit(): void {
@@ -35,13 +42,16 @@ export class AppComponent implements OnInit {
       if (result && result.name && result.ques) {
         const snackBar = this.snackBar;
         // const QuesObject = AV.Object.extend('Ques');
-        const quesObject = new QuesObject();
-        quesObject.save(result).then(function () {
-          snackBar.open('Dear ' + result.name + ', thanks for your feedback!', '', {
-            duration: 2000
-          });
-          this.getQues();
+        // const quesObject = new QuesObject();
+        headers.append('Content-Type', 'application/json');
+        const options = new RequestOptions({
+          headers: headers,
         });
+        this.http.post('https://api.leancloud.cn/1.1/classes/Ques', result, options)
+                  .subscribe(() => {
+                    snackBar.open('Dear ' + result.name + ', thanks for your feedback!', '', {duration: 2000});
+                    this.getQues();
+                  });
       }
     });
   }
